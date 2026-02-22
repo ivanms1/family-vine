@@ -16,12 +16,18 @@ import {
 } from '@/components/ui/form';
 import { toast } from 'sonner';
 
-const registerSchema = z.object({
-  email: z.email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-  displayName: z.string().min(1, 'Display name is required').max(50),
-  familyName: z.string().min(1, 'Family name is required').max(50),
-});
+const registerSchema = z
+  .object({
+    email: z.email('Invalid email address'),
+    password: z.string().min(8, 'Password must be at least 8 characters'),
+    confirmPassword: z.string(),
+    displayName: z.string().min(1, 'Display name is required').max(50),
+    familyName: z.string().min(1, 'Family name is required').max(50),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
+  });
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
@@ -33,12 +39,13 @@ export function RegisterForm() {
     defaultValues: {
       email: '',
       password: '',
+      confirmPassword: '',
       displayName: '',
       familyName: '',
     },
   });
 
-  function onSubmit(values: RegisterFormValues) {
+  function onSubmit({ confirmPassword: _, ...values }: RegisterFormValues) {
     register.mutate(values, {
       onError: (error) => {
         toast.error(error.message || 'Failed to create account');
@@ -98,6 +105,19 @@ export function RegisterForm() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Password</FormLabel>
+              <FormControl>
+                <Input type='password' placeholder='••••••••' {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name='confirmPassword'
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirm Password</FormLabel>
               <FormControl>
                 <Input type='password' placeholder='••••••••' {...field} />
               </FormControl>
