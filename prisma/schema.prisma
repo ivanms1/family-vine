@@ -1,0 +1,358 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ──────────────────────────────────────────────
+// ENUMS
+// ──────────────────────────────────────────────
+
+enum UserRole {
+  PARENT
+  ADMIN
+}
+
+enum SubscriptionTier {
+  FREE
+  FAMILY
+  PREMIUM
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  TRIALING
+}
+
+enum LessonDifficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum LessonStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum TokenTransactionType {
+  EARN_LESSON_COMPLETE
+  EARN_CHALLENGE_COMPLETE
+  EARN_STREAK_BONUS
+  SPEND_UNLOCK_LESSON
+  SPEND_UNLOCK_CONTENT
+  SPEND_JOIN_CHALLENGE
+  ADMIN_ADJUSTMENT
+}
+
+enum SpendRequestStatus {
+  PENDING
+  APPROVED
+  DENIED
+}
+
+enum ChallengeStatus {
+  ACTIVE
+  COMPLETED
+  EXPIRED
+}
+
+// ──────────────────────────────────────────────
+// USER (Parent accounts only)
+// ──────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  displayName  String
+  avatarUrl    String?
+  role         UserRole @default(PARENT)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  familyProfile FamilyProfile?
+  subscription  Subscription?
+
+  @@index([email])
+}
+
+// ──────────────────────────────────────────────
+// FAMILY
+// ──────────────────────────────────────────────
+
+model FamilyProfile {
+  id         String   @id @default(cuid())
+  userId     String   @unique
+  familyName String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  children   ChildProfile[]
+  challenges FamilyChallenge[]
+
+  @@index([userId])
+}
+
+// ──────────────────────────────────────────────
+// CHILD PROFILE (NO email, NO password - parent-managed)
+// ──────────────────────────────────────────────
+
+model ChildProfile {
+  id              String    @id @default(cuid())
+  familyProfileId String
+  displayName     String
+  avatarUrl       String?
+  pin             String?
+  dateOfBirth     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  tokenBalance       Int      @default(0)
+  dailyTokensEarned  Int      @default(0)
+  lastTokenResetDate DateTime @default(now())
+
+  familyProfile     FamilyProfile       @relation(fields: [familyProfileId], references: [id], onDelete: Cascade)
+  lessonProgress    LessonProgress[]
+  tokenTransactions TokenTransaction[]
+  spendRequests     SpendRequest[]
+  challengeProgress ChallengeProgress[]
+
+  @@index([familyProfileId])
+}
+
+// ──────────────────────────────────────────────
+// LESSON CATEGORY
+// ──────────────────────────────────────────────
+
+model LessonCategory {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  iconName    String?
+  color       String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  lessons Lesson[]
+
+  @@index([slug])
+}
+
+// ──────────────────────────────────────────────
+// LESSON
+// ──────────────────────────────────────────────
+
+model Lesson {
+  id              String           @id @default(cuid())
+  categoryId      String
+  title           String
+  slug            String           @unique
+  description     String
+  content         Json
+  thumbnailUrl    String?
+  durationMinutes Int              @default(5)
+  difficulty      LessonDifficulty @default(BEGINNER)
+  status          LessonStatus     @default(DRAFT)
+  tokenReward     Int              @default(10)
+  tokenCost       Int              @default(0)
+  minAge          Int?
+  maxAge          Int?
+  sortOrder       Int              @default(0)
+  isFeatured      Boolean          @default(false)
+  isPremium       Boolean          @default(false)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  category       LessonCategory  @relation(fields: [categoryId], references: [id])
+  lessonProgress LessonProgress[]
+  contentReviews ContentReview[]
+
+  @@index([categoryId])
+  @@index([status])
+  @@index([slug])
+  @@index([categoryId, difficulty])
+  @@index([isFeatured, status])
+}
+
+// ──────────────────────────────────────────────
+// LESSON PROGRESS
+// ──────────────────────────────────────────────
+
+model LessonProgress {
+  id               String    @id @default(cuid())
+  childProfileId   String
+  lessonId         String
+  started          Boolean   @default(false)
+  completed        Boolean   @default(false)
+  score            Int?
+  timeSpentSeconds Int       @default(0)
+  startedAt        DateTime?
+  completedAt      DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  childProfile ChildProfile @relation(fields: [childProfileId], references: [id], onDelete: Cascade)
+  lesson       Lesson       @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([childProfileId, lessonId])
+  @@index([childProfileId])
+  @@index([lessonId])
+  @@index([childProfileId, completed])
+}
+
+// ──────────────────────────────────────────────
+// TOKEN TRANSACTION
+// ──────────────────────────────────────────────
+
+model TokenTransaction {
+  id             String               @id @default(cuid())
+  childProfileId String
+  type           TokenTransactionType
+  amount         Int
+  balanceAfter   Int
+  description    String
+  referenceId    String?
+  createdAt      DateTime             @default(now())
+
+  childProfile ChildProfile @relation(fields: [childProfileId], references: [id], onDelete: Cascade)
+
+  @@index([childProfileId])
+  @@index([childProfileId, createdAt])
+  @@index([type])
+}
+
+// ──────────────────────────────────────────────
+// SPEND REQUEST
+// ──────────────────────────────────────────────
+
+model SpendRequest {
+  id             String             @id @default(cuid())
+  childProfileId String
+  amount         Int
+  reason         String
+  referenceId    String?
+  status         SpendRequestStatus @default(PENDING)
+  reviewedAt     DateTime?
+  createdAt      DateTime           @default(now())
+
+  childProfile ChildProfile @relation(fields: [childProfileId], references: [id], onDelete: Cascade)
+
+  @@index([childProfileId])
+  @@index([status])
+  @@index([childProfileId, status])
+}
+
+// ──────────────────────────────────────────────
+// FAMILY CHALLENGE
+// ──────────────────────────────────────────────
+
+model FamilyChallenge {
+  id              String          @id @default(cuid())
+  familyProfileId String
+  title           String
+  description     String?
+  tokenReward     Int             @default(50)
+  requiredLessons Int             @default(5)
+  categoryId      String?
+  status          ChallengeStatus @default(ACTIVE)
+  startsAt        DateTime        @default(now())
+  endsAt          DateTime
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  familyProfile     FamilyProfile       @relation(fields: [familyProfileId], references: [id], onDelete: Cascade)
+  challengeProgress ChallengeProgress[]
+
+  @@index([familyProfileId])
+  @@index([status])
+}
+
+model ChallengeProgress {
+  id               String    @id @default(cuid())
+  challengeId      String
+  childProfileId   String
+  lessonsCompleted Int       @default(0)
+  completed        Boolean   @default(false)
+  completedAt      DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  challenge    FamilyChallenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  childProfile ChildProfile    @relation(fields: [childProfileId], references: [id], onDelete: Cascade)
+
+  @@unique([challengeId, childProfileId])
+  @@index([challengeId])
+  @@index([childProfileId])
+}
+
+// ──────────────────────────────────────────────
+// SUBSCRIPTION
+// ──────────────────────────────────────────────
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  userId               String             @unique
+  tier                 SubscriptionTier   @default(FREE)
+  status               SubscriptionStatus @default(ACTIVE)
+  stripeCustomerId     String?            @unique
+  stripeSubscriptionId String?            @unique
+  currentPeriodStart   DateTime?
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean            @default(false)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([stripeCustomerId])
+}
+
+// ──────────────────────────────────────────────
+// CONTENT REVIEW
+// ──────────────────────────────────────────────
+
+model ContentReview {
+  id         String    @id @default(cuid())
+  lessonId   String
+  reviewerId String?
+  status     String    @default("PENDING")
+  notes      String?
+  reviewedAt DateTime?
+  createdAt  DateTime  @default(now())
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@index([lessonId])
+  @@index([status])
+}
+
+// ──────────────────────────────────────────────
+// CHURCH/SCHOOL LICENSE (Future)
+// ──────────────────────────────────────────────
+
+model ChurchLicense {
+  id               String   @id @default(cuid())
+  organizationName String
+  contactEmail     String
+  licenseKey       String   @unique
+  maxFamilies      Int      @default(50)
+  activeFamilies   Int      @default(0)
+  isActive         Boolean  @default(true)
+  expiresAt        DateTime
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([licenseKey])
+  @@index([contactEmail])
+}
