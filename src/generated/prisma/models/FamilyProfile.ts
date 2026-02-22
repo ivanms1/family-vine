@@ -185,6 +185,7 @@ export type FamilyProfileWhereInput = {
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   children?: Prisma.ChildProfileListRelationFilter
   challenges?: Prisma.FamilyChallengeListRelationFilter
+  wallet?: Prisma.XOR<Prisma.WalletNullableScalarRelationFilter, Prisma.WalletWhereInput> | null
 }
 
 export type FamilyProfileOrderByWithRelationInput = {
@@ -196,6 +197,7 @@ export type FamilyProfileOrderByWithRelationInput = {
   user?: Prisma.UserOrderByWithRelationInput
   children?: Prisma.ChildProfileOrderByRelationAggregateInput
   challenges?: Prisma.FamilyChallengeOrderByRelationAggregateInput
+  wallet?: Prisma.WalletOrderByWithRelationInput
 }
 
 export type FamilyProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -210,6 +212,7 @@ export type FamilyProfileWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   children?: Prisma.ChildProfileListRelationFilter
   challenges?: Prisma.FamilyChallengeListRelationFilter
+  wallet?: Prisma.XOR<Prisma.WalletNullableScalarRelationFilter, Prisma.WalletWhereInput> | null
 }, "id" | "userId">
 
 export type FamilyProfileOrderByWithAggregationInput = {
@@ -242,6 +245,7 @@ export type FamilyProfileCreateInput = {
   user: Prisma.UserCreateNestedOneWithoutFamilyProfileInput
   children?: Prisma.ChildProfileCreateNestedManyWithoutFamilyProfileInput
   challenges?: Prisma.FamilyChallengeCreateNestedManyWithoutFamilyProfileInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutFamilyProfileInput
 }
 
 export type FamilyProfileUncheckedCreateInput = {
@@ -252,6 +256,7 @@ export type FamilyProfileUncheckedCreateInput = {
   updatedAt?: Date | string
   children?: Prisma.ChildProfileUncheckedCreateNestedManyWithoutFamilyProfileInput
   challenges?: Prisma.FamilyChallengeUncheckedCreateNestedManyWithoutFamilyProfileInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutFamilyProfileInput
 }
 
 export type FamilyProfileUpdateInput = {
@@ -262,6 +267,7 @@ export type FamilyProfileUpdateInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutFamilyProfileNestedInput
   children?: Prisma.ChildProfileUpdateManyWithoutFamilyProfileNestedInput
   challenges?: Prisma.FamilyChallengeUpdateManyWithoutFamilyProfileNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutFamilyProfileNestedInput
 }
 
 export type FamilyProfileUncheckedUpdateInput = {
@@ -272,6 +278,7 @@ export type FamilyProfileUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.ChildProfileUncheckedUpdateManyWithoutFamilyProfileNestedInput
   challenges?: Prisma.FamilyChallengeUncheckedUpdateManyWithoutFamilyProfileNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutFamilyProfileNestedInput
 }
 
 export type FamilyProfileCreateManyInput = {
@@ -391,6 +398,22 @@ export type FamilyProfileUpdateOneRequiredWithoutChallengesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.FamilyProfileUpdateToOneWithWhereWithoutChallengesInput, Prisma.FamilyProfileUpdateWithoutChallengesInput>, Prisma.FamilyProfileUncheckedUpdateWithoutChallengesInput>
 }
 
+export type FamilyProfileCreateNestedOneWithoutWalletInput = {
+  create?: Prisma.XOR<Prisma.FamilyProfileCreateWithoutWalletInput, Prisma.FamilyProfileUncheckedCreateWithoutWalletInput>
+  connectOrCreate?: Prisma.FamilyProfileCreateOrConnectWithoutWalletInput
+  connect?: Prisma.FamilyProfileWhereUniqueInput
+}
+
+export type FamilyProfileUpdateOneWithoutWalletNestedInput = {
+  create?: Prisma.XOR<Prisma.FamilyProfileCreateWithoutWalletInput, Prisma.FamilyProfileUncheckedCreateWithoutWalletInput>
+  connectOrCreate?: Prisma.FamilyProfileCreateOrConnectWithoutWalletInput
+  upsert?: Prisma.FamilyProfileUpsertWithoutWalletInput
+  disconnect?: Prisma.FamilyProfileWhereInput | boolean
+  delete?: Prisma.FamilyProfileWhereInput | boolean
+  connect?: Prisma.FamilyProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FamilyProfileUpdateToOneWithWhereWithoutWalletInput, Prisma.FamilyProfileUpdateWithoutWalletInput>, Prisma.FamilyProfileUncheckedUpdateWithoutWalletInput>
+}
+
 export type FamilyProfileCreateWithoutUserInput = {
   id?: string
   familyName: string
@@ -398,6 +421,7 @@ export type FamilyProfileCreateWithoutUserInput = {
   updatedAt?: Date | string
   children?: Prisma.ChildProfileCreateNestedManyWithoutFamilyProfileInput
   challenges?: Prisma.FamilyChallengeCreateNestedManyWithoutFamilyProfileInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutFamilyProfileInput
 }
 
 export type FamilyProfileUncheckedCreateWithoutUserInput = {
@@ -407,6 +431,7 @@ export type FamilyProfileUncheckedCreateWithoutUserInput = {
   updatedAt?: Date | string
   children?: Prisma.ChildProfileUncheckedCreateNestedManyWithoutFamilyProfileInput
   challenges?: Prisma.FamilyChallengeUncheckedCreateNestedManyWithoutFamilyProfileInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutFamilyProfileInput
 }
 
 export type FamilyProfileCreateOrConnectWithoutUserInput = {
@@ -432,6 +457,7 @@ export type FamilyProfileUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.ChildProfileUpdateManyWithoutFamilyProfileNestedInput
   challenges?: Prisma.FamilyChallengeUpdateManyWithoutFamilyProfileNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutFamilyProfileNestedInput
 }
 
 export type FamilyProfileUncheckedUpdateWithoutUserInput = {
@@ -441,6 +467,7 @@ export type FamilyProfileUncheckedUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.ChildProfileUncheckedUpdateManyWithoutFamilyProfileNestedInput
   challenges?: Prisma.FamilyChallengeUncheckedUpdateManyWithoutFamilyProfileNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutFamilyProfileNestedInput
 }
 
 export type FamilyProfileCreateWithoutChildrenInput = {
@@ -450,6 +477,7 @@ export type FamilyProfileCreateWithoutChildrenInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutFamilyProfileInput
   challenges?: Prisma.FamilyChallengeCreateNestedManyWithoutFamilyProfileInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutFamilyProfileInput
 }
 
 export type FamilyProfileUncheckedCreateWithoutChildrenInput = {
@@ -459,6 +487,7 @@ export type FamilyProfileUncheckedCreateWithoutChildrenInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   challenges?: Prisma.FamilyChallengeUncheckedCreateNestedManyWithoutFamilyProfileInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutFamilyProfileInput
 }
 
 export type FamilyProfileCreateOrConnectWithoutChildrenInput = {
@@ -484,6 +513,7 @@ export type FamilyProfileUpdateWithoutChildrenInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutFamilyProfileNestedInput
   challenges?: Prisma.FamilyChallengeUpdateManyWithoutFamilyProfileNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutFamilyProfileNestedInput
 }
 
 export type FamilyProfileUncheckedUpdateWithoutChildrenInput = {
@@ -493,6 +523,7 @@ export type FamilyProfileUncheckedUpdateWithoutChildrenInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   challenges?: Prisma.FamilyChallengeUncheckedUpdateManyWithoutFamilyProfileNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutFamilyProfileNestedInput
 }
 
 export type FamilyProfileCreateWithoutChallengesInput = {
@@ -502,6 +533,7 @@ export type FamilyProfileCreateWithoutChallengesInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutFamilyProfileInput
   children?: Prisma.ChildProfileCreateNestedManyWithoutFamilyProfileInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutFamilyProfileInput
 }
 
 export type FamilyProfileUncheckedCreateWithoutChallengesInput = {
@@ -511,6 +543,7 @@ export type FamilyProfileUncheckedCreateWithoutChallengesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   children?: Prisma.ChildProfileUncheckedCreateNestedManyWithoutFamilyProfileInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutFamilyProfileInput
 }
 
 export type FamilyProfileCreateOrConnectWithoutChallengesInput = {
@@ -536,6 +569,7 @@ export type FamilyProfileUpdateWithoutChallengesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutFamilyProfileNestedInput
   children?: Prisma.ChildProfileUpdateManyWithoutFamilyProfileNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutFamilyProfileNestedInput
 }
 
 export type FamilyProfileUncheckedUpdateWithoutChallengesInput = {
@@ -545,6 +579,63 @@ export type FamilyProfileUncheckedUpdateWithoutChallengesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   children?: Prisma.ChildProfileUncheckedUpdateManyWithoutFamilyProfileNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutFamilyProfileNestedInput
+}
+
+export type FamilyProfileCreateWithoutWalletInput = {
+  id?: string
+  familyName: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutFamilyProfileInput
+  children?: Prisma.ChildProfileCreateNestedManyWithoutFamilyProfileInput
+  challenges?: Prisma.FamilyChallengeCreateNestedManyWithoutFamilyProfileInput
+}
+
+export type FamilyProfileUncheckedCreateWithoutWalletInput = {
+  id?: string
+  userId: string
+  familyName: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  children?: Prisma.ChildProfileUncheckedCreateNestedManyWithoutFamilyProfileInput
+  challenges?: Prisma.FamilyChallengeUncheckedCreateNestedManyWithoutFamilyProfileInput
+}
+
+export type FamilyProfileCreateOrConnectWithoutWalletInput = {
+  where: Prisma.FamilyProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.FamilyProfileCreateWithoutWalletInput, Prisma.FamilyProfileUncheckedCreateWithoutWalletInput>
+}
+
+export type FamilyProfileUpsertWithoutWalletInput = {
+  update: Prisma.XOR<Prisma.FamilyProfileUpdateWithoutWalletInput, Prisma.FamilyProfileUncheckedUpdateWithoutWalletInput>
+  create: Prisma.XOR<Prisma.FamilyProfileCreateWithoutWalletInput, Prisma.FamilyProfileUncheckedCreateWithoutWalletInput>
+  where?: Prisma.FamilyProfileWhereInput
+}
+
+export type FamilyProfileUpdateToOneWithWhereWithoutWalletInput = {
+  where?: Prisma.FamilyProfileWhereInput
+  data: Prisma.XOR<Prisma.FamilyProfileUpdateWithoutWalletInput, Prisma.FamilyProfileUncheckedUpdateWithoutWalletInput>
+}
+
+export type FamilyProfileUpdateWithoutWalletInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  familyName?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutFamilyProfileNestedInput
+  children?: Prisma.ChildProfileUpdateManyWithoutFamilyProfileNestedInput
+  challenges?: Prisma.FamilyChallengeUpdateManyWithoutFamilyProfileNestedInput
+}
+
+export type FamilyProfileUncheckedUpdateWithoutWalletInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  familyName?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  children?: Prisma.ChildProfileUncheckedUpdateManyWithoutFamilyProfileNestedInput
+  challenges?: Prisma.FamilyChallengeUncheckedUpdateManyWithoutFamilyProfileNestedInput
 }
 
 
@@ -596,6 +687,7 @@ export type FamilyProfileSelect<ExtArgs extends runtime.Types.Extensions.Interna
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   children?: boolean | Prisma.FamilyProfile$childrenArgs<ExtArgs>
   challenges?: boolean | Prisma.FamilyProfile$challengesArgs<ExtArgs>
+  wallet?: boolean | Prisma.FamilyProfile$walletArgs<ExtArgs>
   _count?: boolean | Prisma.FamilyProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["familyProfile"]>
 
@@ -630,6 +722,7 @@ export type FamilyProfileInclude<ExtArgs extends runtime.Types.Extensions.Intern
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   children?: boolean | Prisma.FamilyProfile$childrenArgs<ExtArgs>
   challenges?: boolean | Prisma.FamilyProfile$challengesArgs<ExtArgs>
+  wallet?: boolean | Prisma.FamilyProfile$walletArgs<ExtArgs>
   _count?: boolean | Prisma.FamilyProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FamilyProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -645,6 +738,7 @@ export type $FamilyProfilePayload<ExtArgs extends runtime.Types.Extensions.Inter
     user: Prisma.$UserPayload<ExtArgs>
     children: Prisma.$ChildProfilePayload<ExtArgs>[]
     challenges: Prisma.$FamilyChallengePayload<ExtArgs>[]
+    wallet: Prisma.$WalletPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1049,6 +1143,7 @@ export interface Prisma__FamilyProfileClient<T, Null = never, ExtArgs extends ru
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   children<T extends Prisma.FamilyProfile$childrenArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FamilyProfile$childrenArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChildProfilePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   challenges<T extends Prisma.FamilyProfile$challengesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FamilyProfile$challengesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FamilyChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  wallet<T extends Prisma.FamilyProfile$walletArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FamilyProfile$walletArgs<ExtArgs>>): Prisma.Prisma__WalletClient<runtime.Types.Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1524,6 +1619,25 @@ export type FamilyProfile$challengesArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.FamilyChallengeScalarFieldEnum | Prisma.FamilyChallengeScalarFieldEnum[]
+}
+
+/**
+ * FamilyProfile.wallet
+ */
+export type FamilyProfile$walletArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Wallet
+   */
+  select?: Prisma.WalletSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Wallet
+   */
+  omit?: Prisma.WalletOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WalletInclude<ExtArgs> | null
+  where?: Prisma.WalletWhereInput
 }
 
 /**

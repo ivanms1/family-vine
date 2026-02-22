@@ -63,7 +63,8 @@ export const ModelName = {
   ChallengeProgress: 'ChallengeProgress',
   Subscription: 'Subscription',
   ContentReview: 'ContentReview',
-  ChurchLicense: 'ChurchLicense'
+  ChurchLicense: 'ChurchLicense',
+  Wallet: 'Wallet'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -189,7 +190,12 @@ export const TokenTransactionScalarFieldEnum = {
   balanceAfter: 'balanceAfter',
   description: 'description',
   referenceId: 'referenceId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  blockchainSyncStatus: 'blockchainSyncStatus',
+  blockchainTxHash: 'blockchainTxHash',
+  blockchainSyncError: 'blockchainSyncError',
+  blockchainRetryCount: 'blockchainRetryCount',
+  blockchainSyncedAt: 'blockchainSyncedAt'
 } as const
 
 export type TokenTransactionScalarFieldEnum = (typeof TokenTransactionScalarFieldEnum)[keyof typeof TokenTransactionScalarFieldEnum]
@@ -285,6 +291,20 @@ export const ChurchLicenseScalarFieldEnum = {
 } as const
 
 export type ChurchLicenseScalarFieldEnum = (typeof ChurchLicenseScalarFieldEnum)[keyof typeof ChurchLicenseScalarFieldEnum]
+
+
+export const WalletScalarFieldEnum = {
+  id: 'id',
+  address: 'address',
+  encryptedKey: 'encryptedKey',
+  encryptionIV: 'encryptionIV',
+  encryptionTag: 'encryptionTag',
+  familyProfileId: 'familyProfileId',
+  childProfileId: 'childProfileId',
+  createdAt: 'createdAt'
+} as const
+
+export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
 
 
 export const SortOrder = {

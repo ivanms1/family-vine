@@ -7,6 +7,7 @@ import type {
   ChildLoginInput,
   UpdateFamilyInput,
 } from '../validators/family.validators';
+import { walletService } from './wallet.service';
 
 function mapChild(child: {
   id: string;
@@ -89,6 +90,11 @@ export const familyService = {
         avatarUrl: input.avatarUrl,
         pin: pinHash,
       },
+    });
+
+    // Generate blockchain wallet for the child (non-blocking)
+    walletService.createChildWallet(child.id).catch((err) => {
+      console.error('Failed to create child wallet:', err.message);
     });
 
     return mapChild(child);

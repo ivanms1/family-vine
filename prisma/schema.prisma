@@ -63,6 +63,13 @@ enum ChallengeStatus {
   EXPIRED
 }
 
+enum BlockchainSyncStatus {
+  PENDING
+  SUBMITTED
+  CONFIRMED
+  FAILED
+}
+
 // ──────────────────────────────────────────────
 // USER (Parent accounts only)
 // ──────────────────────────────────────────────
@@ -97,6 +104,7 @@ model FamilyProfile {
   user       User              @relation(fields: [userId], references: [id], onDelete: Cascade)
   children   ChildProfile[]
   challenges FamilyChallenge[]
+  wallet     Wallet?
 
   @@index([userId])
 }
@@ -124,6 +132,7 @@ model ChildProfile {
   tokenTransactions TokenTransaction[]
   spendRequests     SpendRequest[]
   challengeProgress ChallengeProgress[]
+  wallet            Wallet?
 
   @@index([familyProfileId])
 }
@@ -224,11 +233,19 @@ model TokenTransaction {
   referenceId    String?
   createdAt      DateTime             @default(now())
 
+  // Blockchain sync fields (null for pre-Web3 transactions)
+  blockchainSyncStatus BlockchainSyncStatus?
+  blockchainTxHash     String?
+  blockchainSyncError  String?
+  blockchainRetryCount Int                   @default(0)
+  blockchainSyncedAt   DateTime?
+
   childProfile ChildProfile @relation(fields: [childProfileId], references: [id], onDelete: Cascade)
 
   @@index([childProfileId])
   @@index([childProfileId, createdAt])
   @@index([type])
+  @@index([blockchainSyncStatus])
 }
 
 // ──────────────────────────────────────────────
@@ -355,4 +372,26 @@ model ChurchLicense {
 
   @@index([licenseKey])
   @@index([contactEmail])
+}
+
+// ──────────────────────────────────────────────
+// WALLET (Custodial blockchain wallets)
+// ──────────────────────────────────────────────
+
+model Wallet {
+  id            String @id @default(cuid())
+  address       String @unique
+  encryptedKey  String // AES-256-GCM encrypted private key
+  encryptionIV  String // Initialization vector
+  encryptionTag String // GCM auth tag
+
+  // Polymorphic owner: exactly one of these is set
+  familyProfileId String?        @unique
+  childProfileId  String?        @unique
+  createdAt       DateTime       @default(now())
+
+  familyProfile FamilyProfile? @relation(fields: [familyProfileId], references: [id], onDelete: Cascade)
+  childProfile  ChildProfile?  @relation(fields: [childProfileId], references: [id], onDelete: Cascade)
+
+  @@index([address])
 }

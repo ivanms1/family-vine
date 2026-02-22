@@ -273,6 +273,7 @@ export type ChildProfileWhereInput = {
   tokenTransactions?: Prisma.TokenTransactionListRelationFilter
   spendRequests?: Prisma.SpendRequestListRelationFilter
   challengeProgress?: Prisma.ChallengeProgressListRelationFilter
+  wallet?: Prisma.XOR<Prisma.WalletNullableScalarRelationFilter, Prisma.WalletWhereInput> | null
 }
 
 export type ChildProfileOrderByWithRelationInput = {
@@ -292,6 +293,7 @@ export type ChildProfileOrderByWithRelationInput = {
   tokenTransactions?: Prisma.TokenTransactionOrderByRelationAggregateInput
   spendRequests?: Prisma.SpendRequestOrderByRelationAggregateInput
   challengeProgress?: Prisma.ChallengeProgressOrderByRelationAggregateInput
+  wallet?: Prisma.WalletOrderByWithRelationInput
 }
 
 export type ChildProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -314,6 +316,7 @@ export type ChildProfileWhereUniqueInput = Prisma.AtLeast<{
   tokenTransactions?: Prisma.TokenTransactionListRelationFilter
   spendRequests?: Prisma.SpendRequestListRelationFilter
   challengeProgress?: Prisma.ChallengeProgressListRelationFilter
+  wallet?: Prisma.XOR<Prisma.WalletNullableScalarRelationFilter, Prisma.WalletWhereInput> | null
 }, "id">
 
 export type ChildProfileOrderByWithAggregationInput = {
@@ -368,6 +371,7 @@ export type ChildProfileCreateInput = {
   tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutChildProfileInput
   spendRequests?: Prisma.SpendRequestCreateNestedManyWithoutChildProfileInput
   challengeProgress?: Prisma.ChallengeProgressCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileUncheckedCreateInput = {
@@ -386,6 +390,7 @@ export type ChildProfileUncheckedCreateInput = {
   tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutChildProfileInput
   spendRequests?: Prisma.SpendRequestUncheckedCreateNestedManyWithoutChildProfileInput
   challengeProgress?: Prisma.ChallengeProgressUncheckedCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileUpdateInput = {
@@ -404,6 +409,7 @@ export type ChildProfileUpdateInput = {
   tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutChildProfileNestedInput
   spendRequests?: Prisma.SpendRequestUpdateManyWithoutChildProfileNestedInput
   challengeProgress?: Prisma.ChallengeProgressUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutChildProfileNestedInput
 }
 
 export type ChildProfileUncheckedUpdateInput = {
@@ -422,6 +428,7 @@ export type ChildProfileUncheckedUpdateInput = {
   tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutChildProfileNestedInput
   spendRequests?: Prisma.SpendRequestUncheckedUpdateManyWithoutChildProfileNestedInput
   challengeProgress?: Prisma.ChallengeProgressUncheckedUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutChildProfileNestedInput
 }
 
 export type ChildProfileCreateManyInput = {
@@ -530,6 +537,11 @@ export type ChildProfileSumOrderByAggregateInput = {
 export type ChildProfileScalarRelationFilter = {
   is?: Prisma.ChildProfileWhereInput
   isNot?: Prisma.ChildProfileWhereInput
+}
+
+export type ChildProfileNullableScalarRelationFilter = {
+  is?: Prisma.ChildProfileWhereInput | null
+  isNot?: Prisma.ChildProfileWhereInput | null
 }
 
 export type ChildProfileCreateNestedManyWithoutFamilyProfileInput = {
@@ -642,6 +654,22 @@ export type ChildProfileUpdateOneRequiredWithoutChallengeProgressNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ChildProfileUpdateToOneWithWhereWithoutChallengeProgressInput, Prisma.ChildProfileUpdateWithoutChallengeProgressInput>, Prisma.ChildProfileUncheckedUpdateWithoutChallengeProgressInput>
 }
 
+export type ChildProfileCreateNestedOneWithoutWalletInput = {
+  create?: Prisma.XOR<Prisma.ChildProfileCreateWithoutWalletInput, Prisma.ChildProfileUncheckedCreateWithoutWalletInput>
+  connectOrCreate?: Prisma.ChildProfileCreateOrConnectWithoutWalletInput
+  connect?: Prisma.ChildProfileWhereUniqueInput
+}
+
+export type ChildProfileUpdateOneWithoutWalletNestedInput = {
+  create?: Prisma.XOR<Prisma.ChildProfileCreateWithoutWalletInput, Prisma.ChildProfileUncheckedCreateWithoutWalletInput>
+  connectOrCreate?: Prisma.ChildProfileCreateOrConnectWithoutWalletInput
+  upsert?: Prisma.ChildProfileUpsertWithoutWalletInput
+  disconnect?: Prisma.ChildProfileWhereInput | boolean
+  delete?: Prisma.ChildProfileWhereInput | boolean
+  connect?: Prisma.ChildProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ChildProfileUpdateToOneWithWhereWithoutWalletInput, Prisma.ChildProfileUpdateWithoutWalletInput>, Prisma.ChildProfileUncheckedUpdateWithoutWalletInput>
+}
+
 export type ChildProfileCreateWithoutFamilyProfileInput = {
   id?: string
   displayName: string
@@ -657,6 +685,7 @@ export type ChildProfileCreateWithoutFamilyProfileInput = {
   tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutChildProfileInput
   spendRequests?: Prisma.SpendRequestCreateNestedManyWithoutChildProfileInput
   challengeProgress?: Prisma.ChallengeProgressCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileUncheckedCreateWithoutFamilyProfileInput = {
@@ -674,6 +703,7 @@ export type ChildProfileUncheckedCreateWithoutFamilyProfileInput = {
   tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutChildProfileInput
   spendRequests?: Prisma.SpendRequestUncheckedCreateNestedManyWithoutChildProfileInput
   challengeProgress?: Prisma.ChallengeProgressUncheckedCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileCreateOrConnectWithoutFamilyProfileInput = {
@@ -734,6 +764,7 @@ export type ChildProfileCreateWithoutLessonProgressInput = {
   tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutChildProfileInput
   spendRequests?: Prisma.SpendRequestCreateNestedManyWithoutChildProfileInput
   challengeProgress?: Prisma.ChallengeProgressCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileUncheckedCreateWithoutLessonProgressInput = {
@@ -751,6 +782,7 @@ export type ChildProfileUncheckedCreateWithoutLessonProgressInput = {
   tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutChildProfileInput
   spendRequests?: Prisma.SpendRequestUncheckedCreateNestedManyWithoutChildProfileInput
   challengeProgress?: Prisma.ChallengeProgressUncheckedCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileCreateOrConnectWithoutLessonProgressInput = {
@@ -784,6 +816,7 @@ export type ChildProfileUpdateWithoutLessonProgressInput = {
   tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutChildProfileNestedInput
   spendRequests?: Prisma.SpendRequestUpdateManyWithoutChildProfileNestedInput
   challengeProgress?: Prisma.ChallengeProgressUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutChildProfileNestedInput
 }
 
 export type ChildProfileUncheckedUpdateWithoutLessonProgressInput = {
@@ -801,6 +834,7 @@ export type ChildProfileUncheckedUpdateWithoutLessonProgressInput = {
   tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutChildProfileNestedInput
   spendRequests?: Prisma.SpendRequestUncheckedUpdateManyWithoutChildProfileNestedInput
   challengeProgress?: Prisma.ChallengeProgressUncheckedUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutChildProfileNestedInput
 }
 
 export type ChildProfileCreateWithoutTokenTransactionsInput = {
@@ -818,6 +852,7 @@ export type ChildProfileCreateWithoutTokenTransactionsInput = {
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutChildProfileInput
   spendRequests?: Prisma.SpendRequestCreateNestedManyWithoutChildProfileInput
   challengeProgress?: Prisma.ChallengeProgressCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileUncheckedCreateWithoutTokenTransactionsInput = {
@@ -835,6 +870,7 @@ export type ChildProfileUncheckedCreateWithoutTokenTransactionsInput = {
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutChildProfileInput
   spendRequests?: Prisma.SpendRequestUncheckedCreateNestedManyWithoutChildProfileInput
   challengeProgress?: Prisma.ChallengeProgressUncheckedCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileCreateOrConnectWithoutTokenTransactionsInput = {
@@ -868,6 +904,7 @@ export type ChildProfileUpdateWithoutTokenTransactionsInput = {
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutChildProfileNestedInput
   spendRequests?: Prisma.SpendRequestUpdateManyWithoutChildProfileNestedInput
   challengeProgress?: Prisma.ChallengeProgressUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutChildProfileNestedInput
 }
 
 export type ChildProfileUncheckedUpdateWithoutTokenTransactionsInput = {
@@ -885,6 +922,7 @@ export type ChildProfileUncheckedUpdateWithoutTokenTransactionsInput = {
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutChildProfileNestedInput
   spendRequests?: Prisma.SpendRequestUncheckedUpdateManyWithoutChildProfileNestedInput
   challengeProgress?: Prisma.ChallengeProgressUncheckedUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutChildProfileNestedInput
 }
 
 export type ChildProfileCreateWithoutSpendRequestsInput = {
@@ -902,6 +940,7 @@ export type ChildProfileCreateWithoutSpendRequestsInput = {
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutChildProfileInput
   tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutChildProfileInput
   challengeProgress?: Prisma.ChallengeProgressCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileUncheckedCreateWithoutSpendRequestsInput = {
@@ -919,6 +958,7 @@ export type ChildProfileUncheckedCreateWithoutSpendRequestsInput = {
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutChildProfileInput
   tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutChildProfileInput
   challengeProgress?: Prisma.ChallengeProgressUncheckedCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileCreateOrConnectWithoutSpendRequestsInput = {
@@ -952,6 +992,7 @@ export type ChildProfileUpdateWithoutSpendRequestsInput = {
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutChildProfileNestedInput
   tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutChildProfileNestedInput
   challengeProgress?: Prisma.ChallengeProgressUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutChildProfileNestedInput
 }
 
 export type ChildProfileUncheckedUpdateWithoutSpendRequestsInput = {
@@ -969,6 +1010,7 @@ export type ChildProfileUncheckedUpdateWithoutSpendRequestsInput = {
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutChildProfileNestedInput
   tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutChildProfileNestedInput
   challengeProgress?: Prisma.ChallengeProgressUncheckedUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutChildProfileNestedInput
 }
 
 export type ChildProfileCreateWithoutChallengeProgressInput = {
@@ -986,6 +1028,7 @@ export type ChildProfileCreateWithoutChallengeProgressInput = {
   lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutChildProfileInput
   tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutChildProfileInput
   spendRequests?: Prisma.SpendRequestCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileUncheckedCreateWithoutChallengeProgressInput = {
@@ -1003,6 +1046,7 @@ export type ChildProfileUncheckedCreateWithoutChallengeProgressInput = {
   lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutChildProfileInput
   tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutChildProfileInput
   spendRequests?: Prisma.SpendRequestUncheckedCreateNestedManyWithoutChildProfileInput
+  wallet?: Prisma.WalletUncheckedCreateNestedOneWithoutChildProfileInput
 }
 
 export type ChildProfileCreateOrConnectWithoutChallengeProgressInput = {
@@ -1036,6 +1080,7 @@ export type ChildProfileUpdateWithoutChallengeProgressInput = {
   lessonProgress?: Prisma.LessonProgressUpdateManyWithoutChildProfileNestedInput
   tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutChildProfileNestedInput
   spendRequests?: Prisma.SpendRequestUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutChildProfileNestedInput
 }
 
 export type ChildProfileUncheckedUpdateWithoutChallengeProgressInput = {
@@ -1053,6 +1098,95 @@ export type ChildProfileUncheckedUpdateWithoutChallengeProgressInput = {
   lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutChildProfileNestedInput
   tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutChildProfileNestedInput
   spendRequests?: Prisma.SpendRequestUncheckedUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutChildProfileNestedInput
+}
+
+export type ChildProfileCreateWithoutWalletInput = {
+  id?: string
+  displayName: string
+  avatarUrl?: string | null
+  pin?: string | null
+  dateOfBirth?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tokenBalance?: number
+  dailyTokensEarned?: number
+  lastTokenResetDate?: Date | string
+  familyProfile: Prisma.FamilyProfileCreateNestedOneWithoutChildrenInput
+  lessonProgress?: Prisma.LessonProgressCreateNestedManyWithoutChildProfileInput
+  tokenTransactions?: Prisma.TokenTransactionCreateNestedManyWithoutChildProfileInput
+  spendRequests?: Prisma.SpendRequestCreateNestedManyWithoutChildProfileInput
+  challengeProgress?: Prisma.ChallengeProgressCreateNestedManyWithoutChildProfileInput
+}
+
+export type ChildProfileUncheckedCreateWithoutWalletInput = {
+  id?: string
+  familyProfileId: string
+  displayName: string
+  avatarUrl?: string | null
+  pin?: string | null
+  dateOfBirth?: Date | string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  tokenBalance?: number
+  dailyTokensEarned?: number
+  lastTokenResetDate?: Date | string
+  lessonProgress?: Prisma.LessonProgressUncheckedCreateNestedManyWithoutChildProfileInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedCreateNestedManyWithoutChildProfileInput
+  spendRequests?: Prisma.SpendRequestUncheckedCreateNestedManyWithoutChildProfileInput
+  challengeProgress?: Prisma.ChallengeProgressUncheckedCreateNestedManyWithoutChildProfileInput
+}
+
+export type ChildProfileCreateOrConnectWithoutWalletInput = {
+  where: Prisma.ChildProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ChildProfileCreateWithoutWalletInput, Prisma.ChildProfileUncheckedCreateWithoutWalletInput>
+}
+
+export type ChildProfileUpsertWithoutWalletInput = {
+  update: Prisma.XOR<Prisma.ChildProfileUpdateWithoutWalletInput, Prisma.ChildProfileUncheckedUpdateWithoutWalletInput>
+  create: Prisma.XOR<Prisma.ChildProfileCreateWithoutWalletInput, Prisma.ChildProfileUncheckedCreateWithoutWalletInput>
+  where?: Prisma.ChildProfileWhereInput
+}
+
+export type ChildProfileUpdateToOneWithWhereWithoutWalletInput = {
+  where?: Prisma.ChildProfileWhereInput
+  data: Prisma.XOR<Prisma.ChildProfileUpdateWithoutWalletInput, Prisma.ChildProfileUncheckedUpdateWithoutWalletInput>
+}
+
+export type ChildProfileUpdateWithoutWalletInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokenBalance?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyTokensEarned?: Prisma.IntFieldUpdateOperationsInput | number
+  lastTokenResetDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  familyProfile?: Prisma.FamilyProfileUpdateOneRequiredWithoutChildrenNestedInput
+  lessonProgress?: Prisma.LessonProgressUpdateManyWithoutChildProfileNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutChildProfileNestedInput
+  spendRequests?: Prisma.SpendRequestUpdateManyWithoutChildProfileNestedInput
+  challengeProgress?: Prisma.ChallengeProgressUpdateManyWithoutChildProfileNestedInput
+}
+
+export type ChildProfileUncheckedUpdateWithoutWalletInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  familyProfileId?: Prisma.StringFieldUpdateOperationsInput | string
+  displayName?: Prisma.StringFieldUpdateOperationsInput | string
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  pin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokenBalance?: Prisma.IntFieldUpdateOperationsInput | number
+  dailyTokensEarned?: Prisma.IntFieldUpdateOperationsInput | number
+  lastTokenResetDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lessonProgress?: Prisma.LessonProgressUncheckedUpdateManyWithoutChildProfileNestedInput
+  tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutChildProfileNestedInput
+  spendRequests?: Prisma.SpendRequestUncheckedUpdateManyWithoutChildProfileNestedInput
+  challengeProgress?: Prisma.ChallengeProgressUncheckedUpdateManyWithoutChildProfileNestedInput
 }
 
 export type ChildProfileCreateManyFamilyProfileInput = {
@@ -1083,6 +1217,7 @@ export type ChildProfileUpdateWithoutFamilyProfileInput = {
   tokenTransactions?: Prisma.TokenTransactionUpdateManyWithoutChildProfileNestedInput
   spendRequests?: Prisma.SpendRequestUpdateManyWithoutChildProfileNestedInput
   challengeProgress?: Prisma.ChallengeProgressUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUpdateOneWithoutChildProfileNestedInput
 }
 
 export type ChildProfileUncheckedUpdateWithoutFamilyProfileInput = {
@@ -1100,6 +1235,7 @@ export type ChildProfileUncheckedUpdateWithoutFamilyProfileInput = {
   tokenTransactions?: Prisma.TokenTransactionUncheckedUpdateManyWithoutChildProfileNestedInput
   spendRequests?: Prisma.SpendRequestUncheckedUpdateManyWithoutChildProfileNestedInput
   challengeProgress?: Prisma.ChallengeProgressUncheckedUpdateManyWithoutChildProfileNestedInput
+  wallet?: Prisma.WalletUncheckedUpdateOneWithoutChildProfileNestedInput
 }
 
 export type ChildProfileUncheckedUpdateManyWithoutFamilyProfileInput = {
@@ -1190,6 +1326,7 @@ export type ChildProfileSelect<ExtArgs extends runtime.Types.Extensions.Internal
   tokenTransactions?: boolean | Prisma.ChildProfile$tokenTransactionsArgs<ExtArgs>
   spendRequests?: boolean | Prisma.ChildProfile$spendRequestsArgs<ExtArgs>
   challengeProgress?: boolean | Prisma.ChildProfile$challengeProgressArgs<ExtArgs>
+  wallet?: boolean | Prisma.ChildProfile$walletArgs<ExtArgs>
   _count?: boolean | Prisma.ChildProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["childProfile"]>
 
@@ -1244,6 +1381,7 @@ export type ChildProfileInclude<ExtArgs extends runtime.Types.Extensions.Interna
   tokenTransactions?: boolean | Prisma.ChildProfile$tokenTransactionsArgs<ExtArgs>
   spendRequests?: boolean | Prisma.ChildProfile$spendRequestsArgs<ExtArgs>
   challengeProgress?: boolean | Prisma.ChildProfile$challengeProgressArgs<ExtArgs>
+  wallet?: boolean | Prisma.ChildProfile$walletArgs<ExtArgs>
   _count?: boolean | Prisma.ChildProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ChildProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1261,6 +1399,7 @@ export type $ChildProfilePayload<ExtArgs extends runtime.Types.Extensions.Intern
     tokenTransactions: Prisma.$TokenTransactionPayload<ExtArgs>[]
     spendRequests: Prisma.$SpendRequestPayload<ExtArgs>[]
     challengeProgress: Prisma.$ChallengeProgressPayload<ExtArgs>[]
+    wallet: Prisma.$WalletPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1673,6 +1812,7 @@ export interface Prisma__ChildProfileClient<T, Null = never, ExtArgs extends run
   tokenTransactions<T extends Prisma.ChildProfile$tokenTransactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ChildProfile$tokenTransactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TokenTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   spendRequests<T extends Prisma.ChildProfile$spendRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ChildProfile$spendRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpendRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   challengeProgress<T extends Prisma.ChildProfile$challengeProgressArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ChildProfile$challengeProgressArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChallengeProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  wallet<T extends Prisma.ChildProfile$walletArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ChildProfile$walletArgs<ExtArgs>>): Prisma.Prisma__WalletClient<runtime.Types.Result.GetResult<Prisma.$WalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2202,6 +2342,25 @@ export type ChildProfile$challengeProgressArgs<ExtArgs extends runtime.Types.Ext
   take?: number
   skip?: number
   distinct?: Prisma.ChallengeProgressScalarFieldEnum | Prisma.ChallengeProgressScalarFieldEnum[]
+}
+
+/**
+ * ChildProfile.wallet
+ */
+export type ChildProfile$walletArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Wallet
+   */
+  select?: Prisma.WalletSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Wallet
+   */
+  omit?: Prisma.WalletOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WalletInclude<ExtArgs> | null
+  where?: Prisma.WalletWhereInput
 }
 
 /**

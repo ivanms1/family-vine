@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Settings, User, Shield, CreditCard, Check } from 'lucide-react';
+import { Settings, User, Shield, CreditCard, Check, Link2 } from 'lucide-react';
 import { useCurrentUser } from '@/hooks/use-auth';
 import { useFamily } from '@/hooks/use-family';
 import { apiClient } from '@/lib/api-client';
@@ -23,6 +23,7 @@ import {
 } from '@/components/ui/tabs';
 import { toast } from 'sonner';
 import { SUBSCRIPTION_TIERS } from '@/lib/constants';
+import { BlockchainSettingsCard } from '@/components/blockchain/blockchain-settings-card';
 
 export default function SettingsPage() {
   const { data: userData, isLoading } = useCurrentUser();
@@ -56,6 +57,10 @@ export default function SettingsPage() {
           <TabsTrigger value='profile'>Profile</TabsTrigger>
           <TabsTrigger value='security'>Security</TabsTrigger>
           <TabsTrigger value='subscription'>Subscription</TabsTrigger>
+          <TabsTrigger value='blockchain'>
+            <Link2 className='h-3.5 w-3.5 mr-1' />
+            Blockchain
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value='profile' className='mt-4 space-y-4'>
@@ -167,6 +172,10 @@ export default function SettingsPage() {
               </div>
             </CardContent>
           </Card>
+        </TabsContent>
+
+        <TabsContent value='blockchain' className='mt-4'>
+          <BlockchainSettingsCard />
         </TabsContent>
       </Tabs>
     </div>

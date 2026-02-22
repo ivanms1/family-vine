@@ -81,6 +81,11 @@ export default function TokensPage() {
               <p className='text-xs text-muted-foreground'>
                 {child.dailyTokensEarned} earned today
               </p>
+              {child.walletAddress && (
+                <p className='mt-1 font-mono text-xs text-muted-foreground truncate'>
+                  {child.walletAddress.slice(0, 6)}...{child.walletAddress.slice(-4)}
+                </p>
+              )}
             </CardContent>
           </Card>
         ))}

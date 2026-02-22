@@ -311,6 +311,13 @@ export type EnumTokenTransactionTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumTokenTransactionTypeFilter<$PrismaModel> | $Enums.TokenTransactionType
 }
 
+export type EnumBlockchainSyncStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.BlockchainSyncStatus | Prisma.EnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BlockchainSyncStatus[] | Prisma.ListEnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BlockchainSyncStatus[] | Prisma.ListEnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBlockchainSyncStatusNullableFilter<$PrismaModel> | $Enums.BlockchainSyncStatus | null
+}
+
 export type EnumTokenTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.TokenTransactionType | Prisma.EnumTokenTransactionTypeFieldRefInput<$PrismaModel>
   in?: $Enums.TokenTransactionType[] | Prisma.ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel>
@@ -319,6 +326,16 @@ export type EnumTokenTransactionTypeWithAggregatesFilter<$PrismaModel = never> =
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTokenTransactionTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTokenTransactionTypeFilter<$PrismaModel>
+}
+
+export type EnumBlockchainSyncStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BlockchainSyncStatus | Prisma.EnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BlockchainSyncStatus[] | Prisma.ListEnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BlockchainSyncStatus[] | Prisma.ListEnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBlockchainSyncStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.BlockchainSyncStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBlockchainSyncStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBlockchainSyncStatusNullableFilter<$PrismaModel>
 }
 
 export type EnumSpendRequestStatusFilter<$PrismaModel = never> = {
@@ -672,6 +689,13 @@ export type NestedEnumTokenTransactionTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumTokenTransactionTypeFilter<$PrismaModel> | $Enums.TokenTransactionType
 }
 
+export type NestedEnumBlockchainSyncStatusNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.BlockchainSyncStatus | Prisma.EnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BlockchainSyncStatus[] | Prisma.ListEnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BlockchainSyncStatus[] | Prisma.ListEnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBlockchainSyncStatusNullableFilter<$PrismaModel> | $Enums.BlockchainSyncStatus | null
+}
+
 export type NestedEnumTokenTransactionTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.TokenTransactionType | Prisma.EnumTokenTransactionTypeFieldRefInput<$PrismaModel>
   in?: $Enums.TokenTransactionType[] | Prisma.ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel>
@@ -680,6 +704,16 @@ export type NestedEnumTokenTransactionTypeWithAggregatesFilter<$PrismaModel = ne
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumTokenTransactionTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumTokenTransactionTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumBlockchainSyncStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.BlockchainSyncStatus | Prisma.EnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  in?: $Enums.BlockchainSyncStatus[] | Prisma.ListEnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.BlockchainSyncStatus[] | Prisma.ListEnumBlockchainSyncStatusFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumBlockchainSyncStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.BlockchainSyncStatus | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumBlockchainSyncStatusNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumBlockchainSyncStatusNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumSpendRequestStatusFilter<$PrismaModel = never> = {

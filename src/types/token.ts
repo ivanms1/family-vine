@@ -1,3 +1,5 @@
+export type BlockchainSyncStatus = 'PENDING' | 'SUBMITTED' | 'CONFIRMED' | 'FAILED' | null;
+
 export interface TokenTransaction {
   id: string;
   childProfileId: string;
@@ -6,6 +8,8 @@ export interface TokenTransaction {
   balanceAfter: number;
   description: string;
   referenceId: string | null;
+  blockchainSyncStatus: BlockchainSyncStatus;
+  blockchainTxHash: string | null;
   createdAt: string;
 }
 
@@ -52,6 +56,7 @@ export interface FamilyTokenSummary {
     displayName: string;
     tokenBalance: number;
     dailyTokensEarned: number;
+    walletAddress: string | null;
   }[];
   pendingRequests: SpendRequest[];
   recentTransactions: TokenTransaction[];

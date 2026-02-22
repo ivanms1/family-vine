@@ -2,6 +2,7 @@ import { prisma } from '../db';
 import { TOKEN_DAILY_CAP } from '@/lib/constants';
 import type { CompleteLessonInput, LessonQueryInput } from '../validators/lesson.validators';
 import type { Prisma } from '@/generated/prisma/client';
+import { blockchainService } from './blockchain.service';
 
 export const lessonService = {
   async getCategories() {
@@ -232,8 +233,9 @@ export const lessonService = {
           });
 
       // Award tokens
+      let tokenTxId: string | null = null;
       if (tokensToAward > 0) {
-        await tx.tokenTransaction.create({
+        const tokenTx = await tx.tokenTransaction.create({
           data: {
             childProfileId,
             type: 'EARN_LESSON_COMPLETE',
@@ -241,8 +243,10 @@ export const lessonService = {
             balanceAfter: newBalance,
             description: `Completed: ${lesson.title}`,
             referenceId: lessonId,
+            blockchainSyncStatus: blockchainService.isEnabled() ? 'PENDING' : undefined,
           },
         });
+        tokenTxId = tokenTx.id;
       }
 
       // Update child balance
@@ -255,8 +259,15 @@ export const lessonService = {
         },
       });
 
-      return { progress, tokensAwarded: tokensToAward, newBalance };
+      return { progress, tokensAwarded: tokensToAward, newBalance, tokenTxId };
     });
+
+    // Fire-and-forget blockchain sync
+    if (result.tokenTxId) {
+      blockchainService.syncTransaction(result.tokenTxId).catch((err) => {
+        console.error('Blockchain sync failed (will retry):', err.message);
+      });
+    }
 
     return {
       progress: mapProgress(result.progress),

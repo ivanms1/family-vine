@@ -1,6 +1,7 @@
 import { prisma } from '../db';
 import { hashPassword, comparePassword, signJwt } from '../auth';
 import type { RegisterInput, LoginInput } from '../validators/auth.validators';
+import { walletService } from './wallet.service';
 
 export const authService = {
   async register(input: RegisterInput) {
@@ -35,6 +36,11 @@ export const authService = {
         familyProfile: true,
         subscription: true,
       },
+    });
+
+    // Generate blockchain wallet for the family (non-blocking)
+    walletService.createFamilyWallet(user.familyProfile!.id).catch((err) => {
+      console.error('Failed to create family wallet:', err.message);
     });
 
     const token = await signJwt({

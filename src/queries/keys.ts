@@ -8,4 +8,5 @@ export const QUERY_KEYS = {
   PROGRESS: 'progress',
   SUBSCRIPTION: 'subscription',
   CHALLENGES: 'challenges',
+  BLOCKCHAIN: 'blockchain',
 } as const;

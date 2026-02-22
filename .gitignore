@@ -37,5 +37,11 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# hardhat / contracts
+contracts/artifacts/
+contracts/cache/
+contracts/typechain-types/
+contracts/node_modules/
+
 # claude
 .claude/

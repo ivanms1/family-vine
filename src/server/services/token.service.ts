@@ -1,6 +1,7 @@
 import { prisma } from '../db';
 import { TOKEN_DAILY_CAP } from '@/lib/constants';
 import type { CreateSpendRequestInput, ReviewSpendRequestInput } from '../validators/token.validators';
+import { blockchainService } from './blockchain.service';
 
 export const tokenService = {
   async getBalance(childProfileId: string) {
@@ -89,6 +90,7 @@ export const tokenService = {
         displayName: true,
         tokenBalance: true,
         dailyTokensEarned: true,
+        wallet: { select: { address: true } },
       },
     });
 
@@ -115,7 +117,13 @@ export const tokenService = {
     });
 
     return {
-      children,
+      children: children.map((c) => ({
+        id: c.id,
+        displayName: c.displayName,
+        tokenBalance: c.tokenBalance,
+        dailyTokensEarned: c.dailyTokensEarned,
+        walletAddress: c.wallet?.address ?? null,
+      })),
       pendingRequests: pendingRequests.map((r) => ({
         ...mapSpendRequest(r),
         childName: r.childProfile.displayName,
@@ -182,13 +190,13 @@ export const tokenService = {
       // Deduct tokens in a transaction
       const newBalance = request.childProfile.tokenBalance - request.amount;
 
-      await prisma.$transaction(async (tx) => {
+      const txResult = await prisma.$transaction(async (tx) => {
         await tx.spendRequest.update({
           where: { id: requestId },
           data: { status: 'APPROVED', reviewedAt: new Date() },
         });
 
-        await tx.tokenTransaction.create({
+        const tokenTx = await tx.tokenTransaction.create({
           data: {
             childProfileId: request.childProfileId,
             type: 'SPEND_UNLOCK_CONTENT',
@@ -196,6 +204,7 @@ export const tokenService = {
             balanceAfter: newBalance,
             description: `Spend approved: ${request.reason}`,
             referenceId: request.referenceId,
+            blockchainSyncStatus: blockchainService.isEnabled() ? 'PENDING' : undefined,
           },
         });
 
@@ -203,7 +212,16 @@ export const tokenService = {
           where: { id: request.childProfileId },
           data: { tokenBalance: newBalance },
         });
+
+        return { tokenTxId: tokenTx.id };
       });
+
+      // Fire-and-forget blockchain sync
+      if (txResult.tokenTxId) {
+        blockchainService.syncTransaction(txResult.tokenTxId).catch((err) => {
+          console.error('Blockchain sync failed (will retry):', err.message);
+        });
+      }
     } else {
       await prisma.spendRequest.update({
         where: { id: requestId },
@@ -227,6 +245,8 @@ function mapTransaction(t: {
   balanceAfter: number;
   description: string;
   referenceId: string | null;
+  blockchainSyncStatus: string | null;
+  blockchainTxHash: string | null;
   createdAt: Date;
 }) {
   return {
@@ -237,6 +257,8 @@ function mapTransaction(t: {
     balanceAfter: t.balanceAfter,
     description: t.description,
     referenceId: t.referenceId,
+    blockchainSyncStatus: t.blockchainSyncStatus,
+    blockchainTxHash: t.blockchainTxHash,
     createdAt: t.createdAt.toISOString(),
   };
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Coins, Send, Clock, CheckCircle2, XCircle, ArrowUp, ArrowDown } from 'lucide-react';
+import { Coins, Send, Clock, CheckCircle2, XCircle, ArrowUp, ArrowDown, Link2 } from 'lucide-react';
 import {
   useTokenBalance,
   useTokenHistory,
@@ -156,14 +156,26 @@ export default function MyRewardsPage() {
                           </p>
                         </div>
                       </div>
-                      <span
-                        className={`font-semibold ${
-                          t.amount > 0 ? 'text-green-600' : 'text-red-600'
-                        }`}
-                      >
-                        {t.amount > 0 ? '+' : ''}
-                        {t.amount}
-                      </span>
+                      <div className='flex items-center gap-1.5'>
+                        <span
+                          className={`font-semibold ${
+                            t.amount > 0 ? 'text-green-600' : 'text-red-600'
+                          }`}
+                        >
+                          {t.amount > 0 ? '+' : ''}
+                          {t.amount}
+                        </span>
+                        {t.blockchainSyncStatus === 'CONFIRMED' && (
+                          <span title='Recorded on blockchain'>
+                            <Link2 className='h-3 w-3 text-blue-500' />
+                          </span>
+                        )}
+                        {(t.blockchainSyncStatus === 'PENDING' || t.blockchainSyncStatus === 'SUBMITTED') && (
+                          <span title='Syncing to blockchain...'>
+                            <Link2 className='h-3 w-3 text-muted-foreground animate-pulse' />
+                          </span>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </div>

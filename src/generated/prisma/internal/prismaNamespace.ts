@@ -396,7 +396,8 @@ export const ModelName = {
   ChallengeProgress: 'ChallengeProgress',
   Subscription: 'Subscription',
   ContentReview: 'ContentReview',
-  ChurchLicense: 'ChurchLicense'
+  ChurchLicense: 'ChurchLicense',
+  Wallet: 'Wallet'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -412,7 +413,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "familyProfile" | "childProfile" | "lessonCategory" | "lesson" | "lessonProgress" | "tokenTransaction" | "spendRequest" | "familyChallenge" | "challengeProgress" | "subscription" | "contentReview" | "churchLicense"
+    modelProps: "user" | "familyProfile" | "childProfile" | "lessonCategory" | "lesson" | "lessonProgress" | "tokenTransaction" | "spendRequest" | "familyChallenge" | "challengeProgress" | "subscription" | "contentReview" | "churchLicense" | "wallet"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1378,6 +1379,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Wallet: {
+      payload: Prisma.$WalletPayload<ExtArgs>
+      fields: Prisma.WalletFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.WalletFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WalletPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.WalletFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WalletPayload>
+        }
+        findFirst: {
+          args: Prisma.WalletFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WalletPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.WalletFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WalletPayload>
+        }
+        findMany: {
+          args: Prisma.WalletFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WalletPayload>[]
+        }
+        create: {
+          args: Prisma.WalletCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WalletPayload>
+        }
+        createMany: {
+          args: Prisma.WalletCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.WalletCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WalletPayload>[]
+        }
+        delete: {
+          args: Prisma.WalletDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WalletPayload>
+        }
+        update: {
+          args: Prisma.WalletUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WalletPayload>
+        }
+        deleteMany: {
+          args: Prisma.WalletDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.WalletUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.WalletUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WalletPayload>[]
+        }
+        upsert: {
+          args: Prisma.WalletUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$WalletPayload>
+        }
+        aggregate: {
+          args: Prisma.WalletAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateWallet>
+        }
+        groupBy: {
+          args: Prisma.WalletGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WalletGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.WalletCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.WalletCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1524,7 +1599,12 @@ export const TokenTransactionScalarFieldEnum = {
   balanceAfter: 'balanceAfter',
   description: 'description',
   referenceId: 'referenceId',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  blockchainSyncStatus: 'blockchainSyncStatus',
+  blockchainTxHash: 'blockchainTxHash',
+  blockchainSyncError: 'blockchainSyncError',
+  blockchainRetryCount: 'blockchainRetryCount',
+  blockchainSyncedAt: 'blockchainSyncedAt'
 } as const
 
 export type TokenTransactionScalarFieldEnum = (typeof TokenTransactionScalarFieldEnum)[keyof typeof TokenTransactionScalarFieldEnum]
@@ -1620,6 +1700,20 @@ export const ChurchLicenseScalarFieldEnum = {
 } as const
 
 export type ChurchLicenseScalarFieldEnum = (typeof ChurchLicenseScalarFieldEnum)[keyof typeof ChurchLicenseScalarFieldEnum]
+
+
+export const WalletScalarFieldEnum = {
+  id: 'id',
+  address: 'address',
+  encryptedKey: 'encryptedKey',
+  encryptionIV: 'encryptionIV',
+  encryptionTag: 'encryptionTag',
+  familyProfileId: 'familyProfileId',
+  childProfileId: 'childProfileId',
+  createdAt: 'createdAt'
+} as const
+
+export type WalletScalarFieldEnum = (typeof WalletScalarFieldEnum)[keyof typeof WalletScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1784,6 +1878,20 @@ export type EnumTokenTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputT
  * Reference to a field of type 'TokenTransactionType[]'
  */
 export type ListEnumTokenTransactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TokenTransactionType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'BlockchainSyncStatus'
+ */
+export type EnumBlockchainSyncStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BlockchainSyncStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'BlockchainSyncStatus[]'
+ */
+export type ListEnumBlockchainSyncStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BlockchainSyncStatus[]'>
     
 
 
@@ -1964,6 +2072,7 @@ export type GlobalOmitConfig = {
   subscription?: Prisma.SubscriptionOmit
   contentReview?: Prisma.ContentReviewOmit
   churchLicense?: Prisma.ChurchLicenseOmit
+  wallet?: Prisma.WalletOmit
 }
 
 /* Types for Logging */

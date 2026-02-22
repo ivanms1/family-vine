@@ -104,3 +104,8 @@ export type ContentReview = Prisma.ContentReviewModel
  * 
  */
 export type ChurchLicense = Prisma.ChurchLicenseModel
+/**
+ * Model Wallet
+ * 
+ */
+export type Wallet = Prisma.WalletModel

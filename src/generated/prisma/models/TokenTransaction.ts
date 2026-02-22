@@ -29,11 +29,13 @@ export type AggregateTokenTransaction = {
 export type TokenTransactionAvgAggregateOutputType = {
   amount: number | null
   balanceAfter: number | null
+  blockchainRetryCount: number | null
 }
 
 export type TokenTransactionSumAggregateOutputType = {
   amount: number | null
   balanceAfter: number | null
+  blockchainRetryCount: number | null
 }
 
 export type TokenTransactionMinAggregateOutputType = {
@@ -45,6 +47,11 @@ export type TokenTransactionMinAggregateOutputType = {
   description: string | null
   referenceId: string | null
   createdAt: Date | null
+  blockchainSyncStatus: $Enums.BlockchainSyncStatus | null
+  blockchainTxHash: string | null
+  blockchainSyncError: string | null
+  blockchainRetryCount: number | null
+  blockchainSyncedAt: Date | null
 }
 
 export type TokenTransactionMaxAggregateOutputType = {
@@ -56,6 +63,11 @@ export type TokenTransactionMaxAggregateOutputType = {
   description: string | null
   referenceId: string | null
   createdAt: Date | null
+  blockchainSyncStatus: $Enums.BlockchainSyncStatus | null
+  blockchainTxHash: string | null
+  blockchainSyncError: string | null
+  blockchainRetryCount: number | null
+  blockchainSyncedAt: Date | null
 }
 
 export type TokenTransactionCountAggregateOutputType = {
@@ -67,6 +79,11 @@ export type TokenTransactionCountAggregateOutputType = {
   description: number
   referenceId: number
   createdAt: number
+  blockchainSyncStatus: number
+  blockchainTxHash: number
+  blockchainSyncError: number
+  blockchainRetryCount: number
+  blockchainSyncedAt: number
   _all: number
 }
 
@@ -74,11 +91,13 @@ export type TokenTransactionCountAggregateOutputType = {
 export type TokenTransactionAvgAggregateInputType = {
   amount?: true
   balanceAfter?: true
+  blockchainRetryCount?: true
 }
 
 export type TokenTransactionSumAggregateInputType = {
   amount?: true
   balanceAfter?: true
+  blockchainRetryCount?: true
 }
 
 export type TokenTransactionMinAggregateInputType = {
@@ -90,6 +109,11 @@ export type TokenTransactionMinAggregateInputType = {
   description?: true
   referenceId?: true
   createdAt?: true
+  blockchainSyncStatus?: true
+  blockchainTxHash?: true
+  blockchainSyncError?: true
+  blockchainRetryCount?: true
+  blockchainSyncedAt?: true
 }
 
 export type TokenTransactionMaxAggregateInputType = {
@@ -101,6 +125,11 @@ export type TokenTransactionMaxAggregateInputType = {
   description?: true
   referenceId?: true
   createdAt?: true
+  blockchainSyncStatus?: true
+  blockchainTxHash?: true
+  blockchainSyncError?: true
+  blockchainRetryCount?: true
+  blockchainSyncedAt?: true
 }
 
 export type TokenTransactionCountAggregateInputType = {
@@ -112,6 +141,11 @@ export type TokenTransactionCountAggregateInputType = {
   description?: true
   referenceId?: true
   createdAt?: true
+  blockchainSyncStatus?: true
+  blockchainTxHash?: true
+  blockchainSyncError?: true
+  blockchainRetryCount?: true
+  blockchainSyncedAt?: true
   _all?: true
 }
 
@@ -210,6 +244,11 @@ export type TokenTransactionGroupByOutputType = {
   description: string
   referenceId: string | null
   createdAt: Date
+  blockchainSyncStatus: $Enums.BlockchainSyncStatus | null
+  blockchainTxHash: string | null
+  blockchainSyncError: string | null
+  blockchainRetryCount: number
+  blockchainSyncedAt: Date | null
   _count: TokenTransactionCountAggregateOutputType | null
   _avg: TokenTransactionAvgAggregateOutputType | null
   _sum: TokenTransactionSumAggregateOutputType | null
@@ -244,6 +283,11 @@ export type TokenTransactionWhereInput = {
   description?: Prisma.StringFilter<"TokenTransaction"> | string
   referenceId?: Prisma.StringNullableFilter<"TokenTransaction"> | string | null
   createdAt?: Prisma.DateTimeFilter<"TokenTransaction"> | Date | string
+  blockchainSyncStatus?: Prisma.EnumBlockchainSyncStatusNullableFilter<"TokenTransaction"> | $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: Prisma.StringNullableFilter<"TokenTransaction"> | string | null
+  blockchainSyncError?: Prisma.StringNullableFilter<"TokenTransaction"> | string | null
+  blockchainRetryCount?: Prisma.IntFilter<"TokenTransaction"> | number
+  blockchainSyncedAt?: Prisma.DateTimeNullableFilter<"TokenTransaction"> | Date | string | null
   childProfile?: Prisma.XOR<Prisma.ChildProfileScalarRelationFilter, Prisma.ChildProfileWhereInput>
 }
 
@@ -256,6 +300,11 @@ export type TokenTransactionOrderByWithRelationInput = {
   description?: Prisma.SortOrder
   referenceId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  blockchainSyncStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockchainTxHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockchainSyncError?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockchainRetryCount?: Prisma.SortOrder
+  blockchainSyncedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   childProfile?: Prisma.ChildProfileOrderByWithRelationInput
 }
 
@@ -271,6 +320,11 @@ export type TokenTransactionWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringFilter<"TokenTransaction"> | string
   referenceId?: Prisma.StringNullableFilter<"TokenTransaction"> | string | null
   createdAt?: Prisma.DateTimeFilter<"TokenTransaction"> | Date | string
+  blockchainSyncStatus?: Prisma.EnumBlockchainSyncStatusNullableFilter<"TokenTransaction"> | $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: Prisma.StringNullableFilter<"TokenTransaction"> | string | null
+  blockchainSyncError?: Prisma.StringNullableFilter<"TokenTransaction"> | string | null
+  blockchainRetryCount?: Prisma.IntFilter<"TokenTransaction"> | number
+  blockchainSyncedAt?: Prisma.DateTimeNullableFilter<"TokenTransaction"> | Date | string | null
   childProfile?: Prisma.XOR<Prisma.ChildProfileScalarRelationFilter, Prisma.ChildProfileWhereInput>
 }, "id">
 
@@ -283,6 +337,11 @@ export type TokenTransactionOrderByWithAggregationInput = {
   description?: Prisma.SortOrder
   referenceId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  blockchainSyncStatus?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockchainTxHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockchainSyncError?: Prisma.SortOrderInput | Prisma.SortOrder
+  blockchainRetryCount?: Prisma.SortOrder
+  blockchainSyncedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.TokenTransactionCountOrderByAggregateInput
   _avg?: Prisma.TokenTransactionAvgOrderByAggregateInput
   _max?: Prisma.TokenTransactionMaxOrderByAggregateInput
@@ -302,6 +361,11 @@ export type TokenTransactionScalarWhereWithAggregatesInput = {
   description?: Prisma.StringWithAggregatesFilter<"TokenTransaction"> | string
   referenceId?: Prisma.StringNullableWithAggregatesFilter<"TokenTransaction"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"TokenTransaction"> | Date | string
+  blockchainSyncStatus?: Prisma.EnumBlockchainSyncStatusNullableWithAggregatesFilter<"TokenTransaction"> | $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: Prisma.StringNullableWithAggregatesFilter<"TokenTransaction"> | string | null
+  blockchainSyncError?: Prisma.StringNullableWithAggregatesFilter<"TokenTransaction"> | string | null
+  blockchainRetryCount?: Prisma.IntWithAggregatesFilter<"TokenTransaction"> | number
+  blockchainSyncedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"TokenTransaction"> | Date | string | null
 }
 
 export type TokenTransactionCreateInput = {
@@ -312,6 +376,11 @@ export type TokenTransactionCreateInput = {
   description: string
   referenceId?: string | null
   createdAt?: Date | string
+  blockchainSyncStatus?: $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: string | null
+  blockchainSyncError?: string | null
+  blockchainRetryCount?: number
+  blockchainSyncedAt?: Date | string | null
   childProfile: Prisma.ChildProfileCreateNestedOneWithoutTokenTransactionsInput
 }
 
@@ -324,6 +393,11 @@ export type TokenTransactionUncheckedCreateInput = {
   description: string
   referenceId?: string | null
   createdAt?: Date | string
+  blockchainSyncStatus?: $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: string | null
+  blockchainSyncError?: string | null
+  blockchainRetryCount?: number
+  blockchainSyncedAt?: Date | string | null
 }
 
 export type TokenTransactionUpdateInput = {
@@ -334,6 +408,11 @@ export type TokenTransactionUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  blockchainSyncStatus?: Prisma.NullableEnumBlockchainSyncStatusFieldUpdateOperationsInput | $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainRetryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  blockchainSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   childProfile?: Prisma.ChildProfileUpdateOneRequiredWithoutTokenTransactionsNestedInput
 }
 
@@ -346,6 +425,11 @@ export type TokenTransactionUncheckedUpdateInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  blockchainSyncStatus?: Prisma.NullableEnumBlockchainSyncStatusFieldUpdateOperationsInput | $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainRetryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  blockchainSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type TokenTransactionCreateManyInput = {
@@ -357,6 +441,11 @@ export type TokenTransactionCreateManyInput = {
   description: string
   referenceId?: string | null
   createdAt?: Date | string
+  blockchainSyncStatus?: $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: string | null
+  blockchainSyncError?: string | null
+  blockchainRetryCount?: number
+  blockchainSyncedAt?: Date | string | null
 }
 
 export type TokenTransactionUpdateManyMutationInput = {
@@ -367,6 +456,11 @@ export type TokenTransactionUpdateManyMutationInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  blockchainSyncStatus?: Prisma.NullableEnumBlockchainSyncStatusFieldUpdateOperationsInput | $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainRetryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  blockchainSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type TokenTransactionUncheckedUpdateManyInput = {
@@ -378,6 +472,11 @@ export type TokenTransactionUncheckedUpdateManyInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  blockchainSyncStatus?: Prisma.NullableEnumBlockchainSyncStatusFieldUpdateOperationsInput | $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainRetryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  blockchainSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type TokenTransactionListRelationFilter = {
@@ -399,11 +498,17 @@ export type TokenTransactionCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   referenceId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  blockchainSyncStatus?: Prisma.SortOrder
+  blockchainTxHash?: Prisma.SortOrder
+  blockchainSyncError?: Prisma.SortOrder
+  blockchainRetryCount?: Prisma.SortOrder
+  blockchainSyncedAt?: Prisma.SortOrder
 }
 
 export type TokenTransactionAvgOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   balanceAfter?: Prisma.SortOrder
+  blockchainRetryCount?: Prisma.SortOrder
 }
 
 export type TokenTransactionMaxOrderByAggregateInput = {
@@ -415,6 +520,11 @@ export type TokenTransactionMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   referenceId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  blockchainSyncStatus?: Prisma.SortOrder
+  blockchainTxHash?: Prisma.SortOrder
+  blockchainSyncError?: Prisma.SortOrder
+  blockchainRetryCount?: Prisma.SortOrder
+  blockchainSyncedAt?: Prisma.SortOrder
 }
 
 export type TokenTransactionMinOrderByAggregateInput = {
@@ -426,11 +536,17 @@ export type TokenTransactionMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   referenceId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  blockchainSyncStatus?: Prisma.SortOrder
+  blockchainTxHash?: Prisma.SortOrder
+  blockchainSyncError?: Prisma.SortOrder
+  blockchainRetryCount?: Prisma.SortOrder
+  blockchainSyncedAt?: Prisma.SortOrder
 }
 
 export type TokenTransactionSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
   balanceAfter?: Prisma.SortOrder
+  blockchainRetryCount?: Prisma.SortOrder
 }
 
 export type TokenTransactionCreateNestedManyWithoutChildProfileInput = {
@@ -479,6 +595,10 @@ export type EnumTokenTransactionTypeFieldUpdateOperationsInput = {
   set?: $Enums.TokenTransactionType
 }
 
+export type NullableEnumBlockchainSyncStatusFieldUpdateOperationsInput = {
+  set?: $Enums.BlockchainSyncStatus | null
+}
+
 export type TokenTransactionCreateWithoutChildProfileInput = {
   id?: string
   type: $Enums.TokenTransactionType
@@ -487,6 +607,11 @@ export type TokenTransactionCreateWithoutChildProfileInput = {
   description: string
   referenceId?: string | null
   createdAt?: Date | string
+  blockchainSyncStatus?: $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: string | null
+  blockchainSyncError?: string | null
+  blockchainRetryCount?: number
+  blockchainSyncedAt?: Date | string | null
 }
 
 export type TokenTransactionUncheckedCreateWithoutChildProfileInput = {
@@ -497,6 +622,11 @@ export type TokenTransactionUncheckedCreateWithoutChildProfileInput = {
   description: string
   referenceId?: string | null
   createdAt?: Date | string
+  blockchainSyncStatus?: $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: string | null
+  blockchainSyncError?: string | null
+  blockchainRetryCount?: number
+  blockchainSyncedAt?: Date | string | null
 }
 
 export type TokenTransactionCreateOrConnectWithoutChildProfileInput = {
@@ -537,6 +667,11 @@ export type TokenTransactionScalarWhereInput = {
   description?: Prisma.StringFilter<"TokenTransaction"> | string
   referenceId?: Prisma.StringNullableFilter<"TokenTransaction"> | string | null
   createdAt?: Prisma.DateTimeFilter<"TokenTransaction"> | Date | string
+  blockchainSyncStatus?: Prisma.EnumBlockchainSyncStatusNullableFilter<"TokenTransaction"> | $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: Prisma.StringNullableFilter<"TokenTransaction"> | string | null
+  blockchainSyncError?: Prisma.StringNullableFilter<"TokenTransaction"> | string | null
+  blockchainRetryCount?: Prisma.IntFilter<"TokenTransaction"> | number
+  blockchainSyncedAt?: Prisma.DateTimeNullableFilter<"TokenTransaction"> | Date | string | null
 }
 
 export type TokenTransactionCreateManyChildProfileInput = {
@@ -547,6 +682,11 @@ export type TokenTransactionCreateManyChildProfileInput = {
   description: string
   referenceId?: string | null
   createdAt?: Date | string
+  blockchainSyncStatus?: $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: string | null
+  blockchainSyncError?: string | null
+  blockchainRetryCount?: number
+  blockchainSyncedAt?: Date | string | null
 }
 
 export type TokenTransactionUpdateWithoutChildProfileInput = {
@@ -557,6 +697,11 @@ export type TokenTransactionUpdateWithoutChildProfileInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  blockchainSyncStatus?: Prisma.NullableEnumBlockchainSyncStatusFieldUpdateOperationsInput | $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainRetryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  blockchainSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type TokenTransactionUncheckedUpdateWithoutChildProfileInput = {
@@ -567,6 +712,11 @@ export type TokenTransactionUncheckedUpdateWithoutChildProfileInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  blockchainSyncStatus?: Prisma.NullableEnumBlockchainSyncStatusFieldUpdateOperationsInput | $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainRetryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  blockchainSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 export type TokenTransactionUncheckedUpdateManyWithoutChildProfileInput = {
@@ -577,6 +727,11 @@ export type TokenTransactionUncheckedUpdateManyWithoutChildProfileInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   referenceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  blockchainSyncStatus?: Prisma.NullableEnumBlockchainSyncStatusFieldUpdateOperationsInput | $Enums.BlockchainSyncStatus | null
+  blockchainTxHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainSyncError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  blockchainRetryCount?: Prisma.IntFieldUpdateOperationsInput | number
+  blockchainSyncedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
 
@@ -590,6 +745,11 @@ export type TokenTransactionSelect<ExtArgs extends runtime.Types.Extensions.Inte
   description?: boolean
   referenceId?: boolean
   createdAt?: boolean
+  blockchainSyncStatus?: boolean
+  blockchainTxHash?: boolean
+  blockchainSyncError?: boolean
+  blockchainRetryCount?: boolean
+  blockchainSyncedAt?: boolean
   childProfile?: boolean | Prisma.ChildProfileDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tokenTransaction"]>
 
@@ -602,6 +762,11 @@ export type TokenTransactionSelectCreateManyAndReturn<ExtArgs extends runtime.Ty
   description?: boolean
   referenceId?: boolean
   createdAt?: boolean
+  blockchainSyncStatus?: boolean
+  blockchainTxHash?: boolean
+  blockchainSyncError?: boolean
+  blockchainRetryCount?: boolean
+  blockchainSyncedAt?: boolean
   childProfile?: boolean | Prisma.ChildProfileDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tokenTransaction"]>
 
@@ -614,6 +779,11 @@ export type TokenTransactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Ty
   description?: boolean
   referenceId?: boolean
   createdAt?: boolean
+  blockchainSyncStatus?: boolean
+  blockchainTxHash?: boolean
+  blockchainSyncError?: boolean
+  blockchainRetryCount?: boolean
+  blockchainSyncedAt?: boolean
   childProfile?: boolean | Prisma.ChildProfileDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["tokenTransaction"]>
 
@@ -626,9 +796,14 @@ export type TokenTransactionSelectScalar = {
   description?: boolean
   referenceId?: boolean
   createdAt?: boolean
+  blockchainSyncStatus?: boolean
+  blockchainTxHash?: boolean
+  blockchainSyncError?: boolean
+  blockchainRetryCount?: boolean
+  blockchainSyncedAt?: boolean
 }
 
-export type TokenTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "childProfileId" | "type" | "amount" | "balanceAfter" | "description" | "referenceId" | "createdAt", ExtArgs["result"]["tokenTransaction"]>
+export type TokenTransactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "childProfileId" | "type" | "amount" | "balanceAfter" | "description" | "referenceId" | "createdAt" | "blockchainSyncStatus" | "blockchainTxHash" | "blockchainSyncError" | "blockchainRetryCount" | "blockchainSyncedAt", ExtArgs["result"]["tokenTransaction"]>
 export type TokenTransactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   childProfile?: boolean | Prisma.ChildProfileDefaultArgs<ExtArgs>
 }
@@ -653,6 +828,11 @@ export type $TokenTransactionPayload<ExtArgs extends runtime.Types.Extensions.In
     description: string
     referenceId: string | null
     createdAt: Date
+    blockchainSyncStatus: $Enums.BlockchainSyncStatus | null
+    blockchainTxHash: string | null
+    blockchainSyncError: string | null
+    blockchainRetryCount: number
+    blockchainSyncedAt: Date | null
   }, ExtArgs["result"]["tokenTransaction"]>
   composites: {}
 }
@@ -1085,6 +1265,11 @@ export interface TokenTransactionFieldRefs {
   readonly description: Prisma.FieldRef<"TokenTransaction", 'String'>
   readonly referenceId: Prisma.FieldRef<"TokenTransaction", 'String'>
   readonly createdAt: Prisma.FieldRef<"TokenTransaction", 'DateTime'>
+  readonly blockchainSyncStatus: Prisma.FieldRef<"TokenTransaction", 'BlockchainSyncStatus'>
+  readonly blockchainTxHash: Prisma.FieldRef<"TokenTransaction", 'String'>
+  readonly blockchainSyncError: Prisma.FieldRef<"TokenTransaction", 'String'>
+  readonly blockchainRetryCount: Prisma.FieldRef<"TokenTransaction", 'Int'>
+  readonly blockchainSyncedAt: Prisma.FieldRef<"TokenTransaction", 'DateTime'>
 }
     
 

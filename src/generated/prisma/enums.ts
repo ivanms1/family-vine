@@ -83,3 +83,13 @@ export const ChallengeStatus = {
 } as const
 
 export type ChallengeStatus = (typeof ChallengeStatus)[keyof typeof ChallengeStatus]
+
+
+export const BlockchainSyncStatus = {
+  PENDING: 'PENDING',
+  SUBMITTED: 'SUBMITTED',
+  CONFIRMED: 'CONFIRMED',
+  FAILED: 'FAILED'
+} as const
+
+export type BlockchainSyncStatus = (typeof BlockchainSyncStatus)[keyof typeof BlockchainSyncStatus]

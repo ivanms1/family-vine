@@ -54,3 +54,6 @@ export const SUBSCRIPTION_TIERS = {
     ],
   },
 } as const;
+
+export const BASE_EXPLORER_URL =
+  process.env.NEXT_PUBLIC_BASE_EXPLORER_URL || 'https://sepolia.basescan.org';
